@@ -24,42 +24,49 @@ const Home = () => {
             </div>
           </>
         ) : error ? (
-          
-          <div>Something Went Wrong..
-          </div>
-          
+          <div>Something Went Wrong..</div>
         ) : (
           <>
-          <div  className={style.maind}>
-            <div className={style.box}>
+            <div className={style.maind}>
+              <div className={style.box}>
                 <input
-                className={style.seachitem}
+                  className={style.seachitem}
                   placeholder="Search By Title"
                   onChange={(e) => setTitle(e.target.value)}
                   type="text"
                 />
-            </div>
-            <div className={style.page}>
-              <button
-                disabled={page < 2 ? true : false}
-                onClick={() => setPage(page - 1)}
-              >
-                ⬅️Previous
-              </button>
-              <button
-                disabled={page >= 1025 ? true : false}
-                onClick={() => setPage(page + 1)}
-              >
-                Next➡️
-              </button>
-                   <button onClick={() => navigate(`/favlist`)}>Watch List</button>
-            </div>
-            <div className={style.grid}>
-              {allAnimes &&
-                allAnimes
-                  .filter((e) => e.title.includes(title))
-                  .map((e, i) => <Anime {...e} key={e.mail_id} />)}
-            </div>
+              </div>
+              <div className={style.page}>
+                <button
+                  disabled={page < 2 ? true : false}
+                  onClick={() => setPage(page - 1)}
+                >
+                  <img
+                    className="arrow_icon"
+                    src="https://www.svgrepo.com/show/181251/previous-arrows.svg"
+                    alt="left arrow"
+                  />
+                  Previous
+                </button>
+                <button
+                  disabled={page >= 1025 ? true : false}
+                  onClick={() => setPage(page + 1)}
+                >
+                  Next
+                  <img
+                    className="arrow_icon"
+                    src="https://www.svgrepo.com/show/181249/next-arrows.svg"
+                    alt="right arrow"
+                  />
+                </button>
+                <button onClick={() => navigate(`/favlist`)}>Watch List</button>
+              </div>
+              <div className={style.grid}>
+                {allAnimes &&
+                  allAnimes
+                    .filter((e) => e.title.includes(title))
+                    .map((e, i) => <Anime {...{ e }} key={e.mail_id} />)}
+              </div>
             </div>
           </>
         )}
